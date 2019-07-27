@@ -1,0 +1,98 @@
+html {
+
+}
+.gallery {
+	position:relative;
+	margin: 10px
+}
+.gallery:after {
+	clear: both;
+	content: "";
+	display: block
+}
+
+/* =Gallery Slide
+-----------------------------------*/
+.image-slide {
+	opacity: 0;
+	width: 400px;
+	height: 245px;
+	-webkit-transition: all 0.5s ease;
+	   -moz-transition: all 0.5s ease;
+	    -ms-transition: all 0.5s ease;
+	     -o-transition: all 0.5s ease;
+			transition: all 0.5s ease
+}
+.image-slide img {
+	position:absolute;	
+}
+.image-slide:after {
+	content: "";
+	width: 415px;
+	height: 245px;
+	position: absolute;
+}
+.image-slide:first-child {
+	opacity: 1
+}
+.image-slide:target {
+	opacity: 1
+}
+
+/* =Gallery List
+-----------------------------------*/
+.image-slide{
+	position:absolute
+
+}
+.image-list {
+	right: 0;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	position:relative
+}
+.image-list li {
+	float: left;
+	margin: 0 0 10px 10px
+}
+.image-list img {
+	display: block
+}
+.image-list li a:before, .image-list li a:after {
+	content: "";
+	top: 0;
+	left: 0;
+	width: 76px;
+
+}
+.image-list li a:before {
+}
+#slide1:target ~ .image-list #link-slide1:after,
+#slide2:target ~ .image-list #link-slide2:after,
+#slide3:target ~ .image-list #link-slide3:after,
+
+#slide4:target ~ .image-list #link-slide4:after,
+#slide5:target ~ .image-list #link-slide5:after,
+#slide6:target ~ .image-list #link-slide6:after,
+
+#slide7:target ~ .image-list #link-slide7:after,
+#slide8:target ~ .image-list #link-slide8:after,
+#slide9:target ~ .image-list #link-slide9:after,
+#slide10:target ~ .image-list #link-slide10:after,
+#slide11:target ~ .image-list #link-slide11:after,
+#slide12:target ~ .image-list #link-slide12:after,
+#slide13:target ~ .image-list #link-slide13:after,
+#slide14:target ~ .image-list #link-slide14:after,
+#slide15:target ~ .image-list #link-slide15:after,
+#slide16:target ~ .image-list #link-slide16:after,
+#slide17:target ~ .image-list #link-slide17:after,
+#slide18:target ~ .image-list #link-slide18:after,
+#slide19:target ~ .image-list #link-slide19:after,
+#slide20:target ~ .image-list #link-slide20:after,
+#slide21:target ~ .image-list #link-slide21:after,
+#slide22:target ~ .image-list #link-slide22:after,
+ {
+	top: -2px;
+	left: -3px;
+}
