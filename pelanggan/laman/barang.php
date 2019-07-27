@@ -8,7 +8,7 @@
 			<div class="card">
 				<div class="card-header"><div class="card-title text-center text-capitalize"><?= $d['nama_barang'];?></div></div>
 				<a href="?page=view-barang&id=<?= $d['id'];?>&idpr=<?= $d['id'];?>">
-					<img src="../panel/pic/<?= $d['img'];?>" class="img-fluid d-block mx-auto my-1" style="height:280px">
+					<img src="img/<?= $d['img'];?>" class="img-fluid d-block mx-auto my-1" style="height:280px">
 					<div class="card-body">
 						<div class="card-text text-center">
 							<span class="text-primary">Rp.<?= number_format($d['harga']);?></span><br>
