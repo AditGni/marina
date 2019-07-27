@@ -20,7 +20,7 @@
 				<?php if($_SESSION['admin']){?>
 				<div class="btn-group rounded-0">
 					<button class="btn btn-outline-warning ker" alt="<?= $d['id'];?>">Keranjang</button>
-					<button class="btn btn-outline-success ker" alt="<?= $d['id'];?>">Beli Sekarang</button>
+					<button class="btn btn-outline-success ker" alt="<?= $d['id'];?>">Beli</button>
 				</div>
 				<?php } ?>
 			</div>

@@ -2,7 +2,7 @@
 error_reporting(0);
 session_start();
 mysql_connect('localhost','root','');
-mysql_select_db('db_penjualankredit');
+mysql_select_db('toko');
 $mod = $_POST['mod'];
 if($mod=='in_car'){
   $id = $_POST['id'];
@@ -36,44 +36,7 @@ if($mod=='in_car'){
   $tot_bersih = $_POST['tot_bersih'];
   $ang = $_POST['angsur'];
 
-  mysql_query("INSERT INTO tbpenjualan VALUES('','$tgl','','$lama','$idp','$dp','$bunga','$tot_kotor','$ang','$tot_bersih')");
-} else if($mod=='in_trans'){
-  $id = $_SESSION['id'];
-  $tgl = date('Y-m-d');
-  $qty = $_POST['qty'];
-  $tot = $_POST['tot'];
-  $sisa = 0;
-  $byr = $_POST['j_bayar'];
-  $bank = $_POST['bank'];
-
-  if($byr=='cod'){
-    $byr = 'tunai';
-  }/* else if($byr=='tf'){
-    $tunai = $tot;
-  } else {
-    $tunai = 0;
-  }*/
-  if($bank=='not'){
-    $bank = '-';
-  }
-  /*$cash = $_POST['cash'];
-  if($cash > $tot){
-    $sisa = $cash - $tot;
-  } else {
-    $sisa = 0;
-  }*/
-
-  mysql_query("INSERT INTO tbpenjualan VALUES('','$tgl','$id','$qty','$tot','$byr','$bank',0,'$sisa','n','-')");
-
-  $sqli = mysql_query("SELECT * FROM tbpenjualan WHERE tanggal='$tgl' AND idp='$id' AND qty='$qty' AND total='$tot' ORDER BY id DESC");
-  $dt = mysql_fetch_array($sqli);
-  $sql = mysql_query("SELECT * FROM tbkeranjang a, tbproduk b WHERE kode_pel='$id' AND a.kode_pro=b.id GROUP BY b.id");
-  while($d = mysql_fetch_array($sql)){
-    $tot = $d['harga'] * $d['jumlah'];
-    mysql_query("INSERT INTO tbdetailpenjualan VALUES('','$dt[id]','$d[kode_pro]','$d[jumlah]','$d[harga]','$tot')");
-  }
-  mysql_query("DELETE FROM tbkeranjang WHERE kode_pel='$id'");
-} else if($mod=='adakah'){
+  mysql_query("INSERT INTO tbpenjualan VALUES('','$tgl','$lama','$idp','$dp','$bunga','$tot_kotor','$ang','$tot_bersih')");
   $id = $_SESSION['id'];
   $que = mysql_query("SELECT * FROM tbpenjualan WHERE idp='$id' AND status<>'y'");
   $row = mysql_num_rows($que);

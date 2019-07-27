@@ -87,7 +87,7 @@
 						<tr>
 							<td>Angsuran/Tenor</td>
 							<td>:</td>
-							<td id="h_kre" alt="">3x</td>
+							<td id="h_kre" alt=""></td>
 						</tr>
 						<tr>
 							<td>Uang Muka(DP)</td>
@@ -99,7 +99,7 @@
 							<td>:</td>
 							<td id="bung" alt="">Rp. 10.000.000</td>
 						</tr>
-						<tr>
+						<tr class="d-none">
 							<td>Sub</td>
 							<td>:</td>
 							<td id="sub" alt="">tau olo</td>
@@ -120,7 +120,7 @@
 			<button class="btn btn-danger btn-block" id="byr"><i class="fa fa-handshake"></i> Bayar</button>
 		</div>
 	</div>
-	<?php } else {?>
+	<?php } else { ?>
 		<div class="alert alert-warning"><i class="fa fa-exclamation-circle"></i> Keranjang anda masih kosong, silahkan isi keranjang anda <a href="?page=barang">disini</a></div>
 	<?php } ?>
 </div>

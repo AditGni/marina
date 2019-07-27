@@ -48,7 +48,7 @@ if($_SESSION['ket']=='admin'){
             <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="?page=barang">Barang</a>
           </li>
           <?php
-          $sql = mysql_query("SELECT SUM(jumlah) as jumlah FROM tbkeranjang");
+          $sql = mysql_query("SELECT SUM(jumlah) as jumlah FROM tbkeranjang WHERE kode_pel='$idp'");
           $r = mysql_num_rows($sql);
           $d = mysql_fetch_array($sql);
           ?>
@@ -250,7 +250,7 @@ if($_SESSION['ket']=='admin'){
         $("#bung").attr('alt', h_bunga);
         $("#sub").attr('alt', (total-h_dp));
         $("#tot").attr('alt', h_total);
-        $("#h_ang").attr('alt', (h_total/tenor));
+        $("#h_ang").attr('alt', (Math.ceil(h_total/tenor)));
 
         $("#h_kre").html($("#kredit").val()+"x");
         $("#h_dp").html(formatRupiah(h_dp.toString())+" ("+dp+"%)");
@@ -286,7 +286,7 @@ if($_SESSION['ket']=='admin'){
         $("#bung").attr('alt', h_bunga);
         $("#sub").attr('alt', (total-h_dp));
         $("#tot").attr('alt', h_total);
-        $("#h_ang").attr('alt', (h_total/tenor));
+        $("#h_ang").attr('alt', (Math.ceil(h_total/tenor)));
 
         $("#h_kre").html($("#kredit").val()+"x");
         $("#h_dp").html(formatRupiah(h_dp.toString())+" ("+dp+"%)");
