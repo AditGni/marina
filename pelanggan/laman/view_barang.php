@@ -9,7 +9,7 @@ $d = mysql_fetch_array($sql);
 		<div class="card-body">
 			<div class="row">
 				<div class="col-md-6">
-					<img src="../panel/pic/<?= $d['img'];?>" class="img-fluid mx-auto d-block" style="height:250px">
+					<img src="img/<?= $d['img'];?>" class="img-fluid mx-auto d-block" style="height:250px">
 				</div>
 				<div class="col-md-6">
 					<table class="table table-sm table-hover table-borderless text-muted">

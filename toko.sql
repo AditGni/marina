@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 27, 2019 at 03:17 PM
+-- Generation Time: Aug 23, 2019 at 05:48 PM
 -- Server version: 5.6.26
 -- PHP Version: 5.6.12
 
@@ -32,7 +32,7 @@ CREATE TABLE IF NOT EXISTS `tbadmin` (
   `pass` varchar(40) NOT NULL,
   `ket` varchar(100) NOT NULL,
   `idp` char(5) NOT NULL
-) ENGINE=MyISAM AUTO_INCREMENT=34 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=36 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `tbadmin`
@@ -40,7 +40,8 @@ CREATE TABLE IF NOT EXISTS `tbadmin` (
 
 INSERT INTO `tbadmin` (`id`, `admin`, `pass`, `ket`, `idp`) VALUES
 (29, 'admin', 'admin', 'admin', ''),
-(33, 'oli', 'oli', 'pelanggan', '8');
+(33, 'oli', 'oli', 'pelanggan', '8'),
+(34, 'adit', 'admin', 'pelanggan', '9');
 
 -- --------------------------------------------------------
 
@@ -87,9 +88,23 @@ CREATE TABLE IF NOT EXISTS `tbdetailpenjualan` (
   `id_penjualan` varchar(10) NOT NULL,
   `id_produk` varchar(10) NOT NULL,
   `banyak` varchar(10) NOT NULL,
-  `harga` varchar(10) NOT NULL,
+  `harga_jual` varchar(10) NOT NULL,
   `total` varchar(10) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `tbdetailpenjualan`
+--
+
+INSERT INTO `tbdetailpenjualan` (`id`, `id_penjualan`, `id_produk`, `banyak`, `harga_jual`, `total`) VALUES
+(1, '1', '21', '1', '299000', '299000'),
+(2, '1', '14', '1', '300000', '300000'),
+(3, '2', '5', '3', '950000', '2850000'),
+(4, '2', '21', '1', '299000', '299000'),
+(5, '3', '6', '2', '500000', '1000000'),
+(6, '4', '6', '2', '500000', '1000000'),
+(7, '5', '17', '2', '1600000', '3200000'),
+(8, '6', '18', '3', '1750000', '5250000');
 
 -- --------------------------------------------------------
 
@@ -100,16 +115,17 @@ CREATE TABLE IF NOT EXISTS `tbdetailpenjualan` (
 CREATE TABLE IF NOT EXISTS `tbkategori` (
   `id` int(10) NOT NULL,
   `kategori` varchar(200) NOT NULL
-) ENGINE=MyISAM AUTO_INCREMENT=27 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=29 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `tbkategori`
 --
 
 INSERT INTO `tbkategori` (`id`, `kategori`) VALUES
-(23, 'meja belajar'),
-(24, 'Meja'),
-(25, 'Kursi Sofa');
+(23, 'Rumah Tangga'),
+(24, 'Furnitur'),
+(25, 'Elektronik & Gadget'),
+(28, 'Beth & Bath');
 
 -- --------------------------------------------------------
 
@@ -122,16 +138,7 @@ CREATE TABLE IF NOT EXISTS `tbkeranjang` (
   `kode_pro` char(10) NOT NULL,
   `kode_pel` char(10) NOT NULL,
   `jumlah` char(20) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `tbkeranjang`
---
-
-INSERT INTO `tbkeranjang` (`id`, `kode_pro`, `kode_pel`, `jumlah`) VALUES
-(1, '5', '8', '7'),
-(2, '6', '8', '4'),
-(3, '7', '8', '5');
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -173,21 +180,16 @@ CREATE TABLE IF NOT EXISTS `tbpelanggan` (
   `nama` varchar(100) NOT NULL,
   `kelamin` varchar(100) NOT NULL,
   `alamat` text NOT NULL,
-  `phone` varchar(50) NOT NULL,
-  `status` varchar(20) NOT NULL
-) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+  `phone` varchar(50) NOT NULL
+) ENGINE=MyISAM AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `tbpelanggan`
 --
 
-INSERT INTO `tbpelanggan` (`id`, `nama`, `kelamin`, `alamat`, `phone`, `status`) VALUES
-(3, 'Sutisna Mokoagow', 'Pria', 'Jl. rambutan Kota Gorontalo', '082348423', 'member'),
-(2, 'Novi Adams', 'Wanita', 'Jl. Delima No.100 Kec. Kota Selatan Kota Gorontalo', '0834676732', ''),
-(4, 'FITRI', 'Wanita', 'JL KALIMANTAN', '08997227277333', 'member'),
-(5, 'sinta', 'Wanita', 'awara', '085343255252', 'reguler'),
-(6, 'ANDI', 'Pria', 'JL BALI', '098484892', 'reguler'),
-(8, 'ido', 'wanita', 'agus', '08882221134', 'pelanggan');
+INSERT INTO `tbpelanggan` (`id`, `nama`, `kelamin`, `alamat`, `phone`) VALUES
+(8, 'ido', 'p', 'agus', '08882221134'),
+(9, 'adit', 'p', 'Jl. Rusak\r\n', '082271384731');
 
 -- --------------------------------------------------------
 
@@ -202,10 +204,26 @@ CREATE TABLE IF NOT EXISTS `tbpenjualan` (
   `idp` varchar(10) NOT NULL,
   `uang_muka` char(15) NOT NULL,
   `bunga` char(15) NOT NULL,
+  `besar_bunga` char(20) NOT NULL,
   `tot_kotor` char(15) NOT NULL,
   `angsuran` char(15) NOT NULL,
-  `tot_bersih` char(15) NOT NULL
-) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+  `tot_bersih` char(15) NOT NULL,
+  `jenis_pembayaran` char(1) NOT NULL,
+  `bukti_pembayaran` varchar(100) NOT NULL,
+  `status` varchar(5) NOT NULL
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `tbpenjualan`
+--
+
+INSERT INTO `tbpenjualan` (`id`, `tanggal`, `lama`, `idp`, `uang_muka`, `bunga`, `besar_bunga`, `tot_kotor`, `angsuran`, `tot_bersih`, `jenis_pembayaran`, `bukti_pembayaran`, `status`) VALUES
+(1, '2019-08-08', '3', '8', '179700', '2.5', '31448', '419300', '150249', '450748', 'k', 'angga(3x4).jpg', 'y'),
+(2, '2019-08-21', '-', '8', '-', '-', '-', '-', '-', '3149000', 't', '-', 'y'),
+(3, '2019-08-21', '12', '9', '250000', '8', '2160000', '2250000', '367500', '4410000', 'k', 'DSC04345 (2).JPG', 'y'),
+(4, '2019-08-21', '12', '8', '50000', '8', '432000', '450000', '73500', '882000', 'k', 'DSC04345 (2).JPG', 'y'),
+(5, '2019-08-21', '6', '8', '160000', '5', '432000', '1440000', '312000', '1872000', 'k', 'DSC04345 (2).JPG', 'y'),
+(6, '2019-08-22', '-', '8', '-', '-', '-', '-', '-', '1750000', 't', '-', 'y');
 
 -- --------------------------------------------------------
 
@@ -218,19 +236,31 @@ CREATE TABLE IF NOT EXISTS `tbproduk` (
   `id_kategori` varchar(10) NOT NULL,
   `nama_barang` text NOT NULL,
   `harga` varchar(10) NOT NULL,
+  `stok` char(10) NOT NULL,
   `deskripsi` text NOT NULL,
   `tanggal` varchar(50) NOT NULL,
   `img` varchar(50) NOT NULL
-) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=25 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `tbproduk`
 --
 
-INSERT INTO `tbproduk` (`id`, `id_kategori`, `nama_barang`, `harga`, `deskripsi`, `tanggal`, `img`) VALUES
-(5, '24', 'Meja makan Kaca', '1500000', '-', '12/09/2018', ''),
-(6, '25', 'Kursi sofa autrali', '2300000', '-', '12/09/2018', ''),
-(7, '23', 'meja belajar olimpic', '1250000', '-', '28/10/2018', '');
+INSERT INTO `tbproduk` (`id`, `id_kategori`, `nama_barang`, `harga`, `stok`, `deskripsi`, `tanggal`, `img`) VALUES
+(5, '23', 'cermin dinding dengan rak', '950000', '13', '-', '2019-08-08', 'Cermin Dinding Bundar dengan rak.jpg'),
+(6, '23', 'tempat sampah', '500000', '9', '-', '2019-08-08', '10228750_4.jpg'),
+(7, '23', 'Proclean Alat Pel Spary 2 In 1 - Hijau', '249000', '4', '-', '2019-08-08', '10207485_1.jpg'),
+(14, '23', 'Kotak Penyimpanan Lipat Otto Velvet - Pink', '300000', '18', '-', '2019-08-08', '10209388_1.jpg'),
+(15, '24', 'Ashley Tartonelle Sofa 1 Dudukan', '5500000', '9', '-', '2019-08-08', '10227280_1.jpg'),
+(16, '24', 'Council 2 Kursi Kantor Sandaran Rendah', '1760200', '45', '-', '2019-08-08', '10200964_1.jpg'),
+(17, '24', 'Haris Meja Kantor', '1600000', '55', '-', '2019-08-08', '10217162_1.jpg'),
+(18, '28', 'Nakas Aleta - Abu-Abu', '1750000', '67', '-', '2019-08-08', '10211235_1.jpg'),
+(19, '28', 'Krishome Rak Kamar Mandi 3 Tingkat', '454300', '23', '-', '2019-08-08', '10180716_1.jpg'),
+(20, '28', 'Passacor Laci Pakaian Chest 5 Tingkat - Putih', '3000000', '44', 'untuk baju dan celana', '2019-08-12', '10209359_1.jpg'),
+(21, '25', 'Kris Hair Dryer 1600w Ph6856', '299000', '6', '-', '2019-08-08', '10143685_1.jpg'),
+(22, '25', 'Kris Alat Cukur Mini Rotary Pq3800s', '170000', '', '-', '2019-08-07', '10143688_1.jpg'),
+(23, '25', 'Nilfisk Power P Animal Alat Penghisap Debu Kering', '6095000', '5', '-', '2019-08-08', '10039389_1.jpg'),
+(24, '25', 'Krisbow S433 Mesin Penghancur Kertas - Hitam', '4237000', '', '-', '2019-08-07', '266758_1.jpg');
 
 -- --------------------------------------------------------
 
@@ -325,7 +355,7 @@ ALTER TABLE `tbstok`
 -- AUTO_INCREMENT for table `tbadmin`
 --
 ALTER TABLE `tbadmin`
-  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=34;
+  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=36;
 --
 -- AUTO_INCREMENT for table `tbangsuran`
 --
@@ -335,17 +365,17 @@ ALTER TABLE `tbangsuran`
 -- AUTO_INCREMENT for table `tbdetailpenjualan`
 --
 ALTER TABLE `tbdetailpenjualan`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `tbkategori`
 --
 ALTER TABLE `tbkategori`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=27;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=29;
 --
 -- AUTO_INCREMENT for table `tbkeranjang`
 --
 ALTER TABLE `tbkeranjang`
-  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `tbkredit`
 --
@@ -355,17 +385,17 @@ ALTER TABLE `tbkredit`
 -- AUTO_INCREMENT for table `tbpelanggan`
 --
 ALTER TABLE `tbpelanggan`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=14;
 --
 -- AUTO_INCREMENT for table `tbpenjualan`
 --
 ALTER TABLE `tbpenjualan`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `tbproduk`
 --
 ALTER TABLE `tbproduk`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=25;
 --
 -- AUTO_INCREMENT for table `tbstok`
 --

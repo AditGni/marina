@@ -1,0 +1,9 @@
+.no-background{
+	background-color: #f8f9fc !important;
+}
+.not-back{
+	background:none!important;
+}
+.link:hover, .link:focus {
+  text-decoration: none;
+}

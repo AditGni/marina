@@ -1,3 +1,3 @@
 <?php
-header("location:pelanggan/?page=barang");
+header("location:pel/?page=barang");
 ?>

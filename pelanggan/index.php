@@ -7,7 +7,7 @@ include "content.php";
 $idp = $_SESSION['id'];
 // CEK SESSION APAKAH ADMIN
 if($_SESSION['ket']=='admin'){
-    header("location:../panel/index.php");
+    header("location:../admin/");
 }
 ?>
 <!DOCTYPE html>
@@ -37,7 +37,7 @@ if($_SESSION['ket']=='admin'){
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
     <div class="container">
-      <a class="navbar-brand js-scroll-trigger" href="#page-top">UD. ARAFAH MEUBEL</a>
+      <a class="navbar-brand js-scroll-trigger" href="#page-top">UD. MARINA</a>
       <button class="navbar-toggler navbar-toggler-right text-uppercase font-weight-bold bg-primary text-white rounded" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         Menu
         <i class="fas fa-bars"></i>
@@ -163,159 +163,8 @@ if($_SESSION['ket']=='admin'){
 
   <!-- Custom scripts for this template -->
   <script src="js/freelancer.min.js"></script>
-  <script type="text/javascript">
-    function formatRupiah(angka, prefix= 'Rp.'){
-      var number_string = angka.replace(/[^,\d]/g, '').toString(),
-      split       = number_string.split(','),
-      sisa        = split[0].length % 3,
-      rupiah        = split[0].substr(0, sisa),
-      ribuan        = split[0].substr(sisa).match(/\d{3}/gi);
- 
-      // tambahkan titik jika yang di input sudah menjadi angka ribuan
-      if(ribuan){
-        separator = sisa ? '.' : '';
-        rupiah += separator + ribuan.join('.');
-      }
- 
-      rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
-      return prefix == undefined ? rupiah : (rupiah ? 'Rp. ' + rupiah : '');
-      // return rupiah;
-    }
-    $("#detail").hide();
-    $("#byr").hide();
-    $("#tun").hide();
-    $("#kre").hide();
-    $(".ker").click(function(){
-      var i = $(this).attr('alt');
-      var k = $(this).text();
-      $.ajax({
-        url: "ajax.php",
-        type: "POST",
-        data: "mod=in_car&id="+i,
-        success: function(dat){
-          if(k=='Beli'){
-            window.location = "?page=keranjang";
-          }
-        }
-      })
-      $.ajax({
-        url: "ajax.php",
-        type: "POST",
-        data: "mod=cek_jumlah_cart",
-        success: function(dat){
-          $("#menu_cart").html("Keranjang "+dat);
-        }
-      })
-    })
-
-    $("#pilih_pay").change(function(){
-      var isi = $(this).val();
-      if(isi=='t'){
-        $("#tun").fadeIn();
-        $("#kre").hide();
-      } else if(isi=='k'){
-        $("#kre").fadeIn();
-        $("#tun").hide();
-      } else {
-        $("#tun").fadeOut();
-        $("#kre").fadeOut();
-      }
-    })
-
-    $("#kredit").change(function(){
-      var isi = $(this).val();
-      if(isi==''){
-        $("#detail").fadeOut();
-        $("#byr").fadeOut();
-      } else {
-        $("#byr").fadeIn();
-        $("#detail").fadeIn();
-        var tenor = $("#kredit").val();
-        var dp = $("#dp").val();
-        var bunga;
-        if(tenor==3){
-          bunga = 2.5;
-        } else if(tenor==6){
-          bunga = 5;
-        } else if(tenor==12){
-          bunga = 8;
-        }
-        var total = $("#total").attr('alt');
-        var h_dp = total*(dp/100);
-        var h_bunga = (total - h_dp)*(bunga/100)*tenor;
-        var h_total = (total-h_dp)+h_bunga;
-
-        $("#h_kre").attr('alt',$("#kredit").val());
-        $("#h_dp").attr('alt', h_dp);
-        $("#bung").attr('alt', h_bunga);
-        $("#sub").attr('alt', (total-h_dp));
-        $("#tot").attr('alt', h_total);
-        $("#h_ang").attr('alt', (Math.ceil(h_total/tenor)));
-
-        $("#h_kre").html($("#kredit").val()+"x");
-        $("#h_dp").html(formatRupiah(h_dp.toString())+" ("+dp+"%)");
-        $("#bung").html(formatRupiah(h_bunga.toString())+" ("+bunga+"%)");
-        $("#tot").html(formatRupiah(h_total.toString()));
-        $("#sub").html(formatRupiah((total-h_dp).toString()));
-        $("#h_ang").html(formatRupiah(Math.ceil(h_total/tenor).toString()));
-      }
-    })
-    $("#dp").change(function(){
-      var isi = $(this).val();
-      if(isi==''){
-        $("#detail").fadeOut();
-      } else {
-        $("#detail").fadeIn();
-        var tenor = $("#kredit").val();
-        var dp = $("#dp").val();
-        var bunga;
-        if(tenor==3){
-          bunga = 2.5;
-        } else if(tenor==6){
-          bunga = 5;
-        } else if(tenor==12){
-          bunga = 8;
-        }
-        var total = $("#total").attr('alt');
-        var h_dp = total*(dp/100);
-        var h_bunga = (total - h_dp)*(bunga/100)*tenor;
-        var h_total = (total-h_dp)+h_bunga;
-
-        $("#h_kre").attr('alt',$("#kredit").val());
-        $("#h_dp").attr('alt', h_dp);
-        $("#bung").attr('alt', h_bunga);
-        $("#sub").attr('alt', (total-h_dp));
-        $("#tot").attr('alt', h_total);
-        $("#h_ang").attr('alt', (Math.ceil(h_total/tenor)));
-
-        $("#h_kre").html($("#kredit").val()+"x");
-        $("#h_dp").html(formatRupiah(h_dp.toString())+" ("+dp+"%)");
-        $("#bung").html(formatRupiah(h_bunga.toString())+" ("+bunga+"%)");
-        $("#tot").html(formatRupiah(h_total.toString()));
-        $("#sub").html(formatRupiah((total-h_dp).toString()));
-        $("#h_ang").html(formatRupiah(Math.ceil(h_total/tenor).toString()));
-      }
-    })
-
-    $("#byr").click(function(){
-      var item = $("#item").attr('alt');
-      var lama = $("#h_kre").attr('alt');
-      var dp = $("#h_dp").attr('alt');
-      var bunga = $("#bung").attr('alt');
-      var tot_kotor = $("#sub").attr('alt');
-      var tot_bersih = $("#tot").attr('alt'); 
-      var ang = $("#h_ang").attr('alt');
-      // alert(item+" "+lama+" "+dp+" "+bunga+" "+tot_kotor+" "+tot_bersih+" "+ang);
-      $.ajax({
-        url: "ajax.php",
-        type: "POST",
-        data: "item="+item+"&lama="+lama+"&dp="+dp+"&bunga="+bunga+"&tot_kotor="+tot_kotor+"&tot_bersih="+tot_bersih+"&angsur="+ang+"&mod=in_pen",
-        success: function(ada){
-          // $("#detail").html(ada);
-        }
-      })
-    })
-  </script>
+  <?php include "img_js.php";?>
+  <?php include "script.php";?>
   <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDyEU8awzu_Fs0oAWAZGueEl7VPrpZShn4&callback=initial"></script>
   <script>
     function initial(){

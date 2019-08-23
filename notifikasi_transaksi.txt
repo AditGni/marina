@@ -1,0 +1,11 @@
+Kredit
+n = belum dibayar
+k = pesanan dalam perjalanan (diantar)
+p = konfirmasi pengataran
+m = pembayaran bermasalah
+y = transaksi sukses
+
+Tunai
+n = konfirmasi pengantaran
+p = pesanan dalam perjalanan (diantar)
+y = transaksi sukses
